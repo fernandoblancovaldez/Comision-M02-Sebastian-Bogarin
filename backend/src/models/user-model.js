@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+// se crea primero el esquema de datos para luego crear el modelo usando el metodo creador que nos ofrece mongoose 
 const UserSchema = new Schema({
   username: {
     type: String,
