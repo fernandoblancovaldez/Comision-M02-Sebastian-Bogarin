@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import { env } from "./settings/config.js";
 import { startConnection } from "./settings/database.js";
+import { userRouter } from "./routes/user-routes.js";
 
 //se crea el servidor
 const app = express();
@@ -13,14 +14,11 @@ const app = express();
 app.use(express.json()); //Middleware para interpretar JSON por body
 app.use(express.urlencoded({ extended: true })); //Middleware para habilitar los formularios HTML
 app.use(express.static("public")); //Middleware para leer archivos estaticos de la carpeta "public"
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
+
+app.use("/user", userRouter);
 
 //se pone en escucha en el puerto designado en las variables de entorno
 app.listen(env.PORT, async () => {

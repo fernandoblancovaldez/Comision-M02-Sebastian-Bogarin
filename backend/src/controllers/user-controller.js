@@ -1,6 +1,6 @@
 import { UserModel } from "../models/user-model.js";
 import * as bcrypt from "bcrypt"; //nos servirá para encriptar el password
-import { createJWT } from "../utils/jwt.js"; //nos servirá para proteger el acceso a los usuarios
+/* import { createJWT } from "../utils/jwt.js"; //nos servirá para proteger el acceso a los usuarios */
 
 //controlador para registro de usuario
 export const ctrlRegisterUser = async (req, res) => {
@@ -58,7 +58,7 @@ export const ctrlDeleteUser = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    await UserModel.findOneAndDelete({ _id: userId });
+    const user = await UserModel.findOneAndDelete({ _id: userId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
