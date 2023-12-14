@@ -7,6 +7,7 @@ import { env } from "./settings/config.js";
 import { startConnection } from "./settings/database.js";
 import { userRouter } from "./routes/user-routes.js";
 import { postRouter } from "./routes/post-routes.js";
+import { commentRouter } from "./routes/comment-routes.js";
 
 //se crea el servidor
 const app = express();
@@ -21,6 +22,7 @@ app.use(morgan("dev"));
 
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 //se pone en escucha en el puerto designado en las variables de entorno
 app.listen(env.PORT, async () => {
