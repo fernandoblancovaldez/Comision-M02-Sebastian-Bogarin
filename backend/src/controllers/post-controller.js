@@ -45,9 +45,13 @@ export const ctrlGetPost = async (req, res) => {
 
 export const ctrlDeletePost = async (req, res) => {
   const { postId } = req.params;
+  const userId = req.user._id;
 
   try {
-    const post = await PostModel.findOneAndDelete({ _id: postId });
+    const post = await PostModel.findOneAndDelete({
+      _id: postId, //se busca el post que coincida con el Id
+      author: userId, //y que el author coincida con el userId loggeado para permitir eliminarlo
+    });
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
