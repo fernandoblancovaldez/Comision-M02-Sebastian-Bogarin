@@ -1,15 +1,21 @@
 import { UserModel } from "../models/user-model.js";
 import * as bcrypt from "bcrypt"; //nos servirá para encriptar el password
-/* import { createJWT } from "../utils/jwt.js"; //nos servirá para proteger el acceso a los usuarios */
+import { createJWT } from "../utils/jwt.js"; //nos servirá para proteger el acceso a los usuarios
 
 //controlador para registro de usuario
 export const ctrlRegisterUser = async (req, res) => {
   try {
-    const newUser = new UserModel(req.body); //se usa el método nativo de mongo
+    const data = req.body; //se extrae la data para crear el user
+    const { password } = req.body; //se extrae el password para encryptarlo
 
+    const hashedPassword = await bcrypt.hash(password, 10); //se encrypta el password
+    const user = { ...data, password: hashedPassword }; //se crea nuevo modelo con la data y el password encryptado
+
+    const newUser = new UserModel(user); //se usa el método nativo de mongo
     await newUser.save();
 
-    res.status(201).json(newUser);
+    const token = await createJWT({ userId: newUser._id }); //se crea token para luego enviarlo por json como respuesta
+    res.status(201).json({ token, user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Couldn't create user" });
@@ -24,10 +30,12 @@ export const ctrlLoginUser = async (req, res) => {
     if (!user) return res.status(404).json({ error: "User not found" });
 
     //se valida que el password enviado por body coincida con el del usuario encontrado por email
-    if (user.password !== password)
-      return res.status(404).json({ error: "Invalid credentials" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    res.status(200).json(user);
+    const token = await createJWT({ userId: user._id });
+
+    res.status(200).json({ token, user });
   } catch (error) {
     res.status(500).json({ error: "Couldn't login user" });
   }
@@ -36,13 +44,22 @@ export const ctrlLoginUser = async (req, res) => {
 //controlador para actualizar 1 usuario
 export const ctrlUpdateUser = async (req, res) => {
   const { userId } = req.params;
+  let newData = req.body; //se extrae la nueva data
 
   try {
     const user = await UserModel.findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    user.set(req.body);
+
+    if (req.body.password) {
+      const { password } = req.body; //se extrae el password para encryptarlo
+
+      const hashedPassword = await bcrypt.hash(password, 10); //se encrypta el password
+      newData = { ...req.body, password: hashedPassword }; //se actualiza la data con el password encryptado
+    }
+
+    user.set(newData);
 
     await user.save();
 
