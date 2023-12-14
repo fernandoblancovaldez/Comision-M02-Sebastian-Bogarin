@@ -9,6 +9,7 @@ export const ctrlCreateComment = async (req, res) => {
     const comment = new CommentModel({
       ...req.body, //se crea nuevo comment con la data traida de body
       author: userId, //se asigna como author el id del user loggeado
+      post: postId, //se asigna tambien para las peticiones Get
     });
 
     await comment.save();
@@ -31,12 +32,14 @@ export const ctrlGetPostComments = async (req, res) => {
   const { postId } = req.params;
 
   try {
-    const post = await PostModel.findOne({ _id: postId });
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+    const comments = await CommentModel.find({ post: postId }, [
+      "description",
+    ]).populate("author", ["username", "avatarURL"]);
+    if (!comments) {
+      return res.status(404).json({ message: "Comments not found" });
     }
 
-    return res.status(200).json(post.comments);
+    return res.status(200).json(comments);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

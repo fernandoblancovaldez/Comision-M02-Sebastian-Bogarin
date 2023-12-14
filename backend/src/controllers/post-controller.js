@@ -19,7 +19,10 @@ export const ctrlCreatePost = async (req, res) => {
 
 export const ctrlListPosts = async (_req, res) => {
   try {
-    const allPosts = await PostModel.find();
+    const allPosts = await PostModel.find({}, "-comments").populate("author", [
+      "username",
+      "avatarURL",
+    ]);
     if (!allPosts) return res.status(404).json({ error: "Posts not found" });
 
     return res.status(200).json(allPosts);
@@ -32,7 +35,9 @@ export const ctrlGetPost = async (req, res) => {
   const { postId } = req.params;
 
   try {
-    const post = await PostModel.findOne({ _id: postId });
+    const post = await PostModel.findOne({ _id: postId })
+      .populate("comments", ["description"])
+      .populate("author", ["username", "avatarURL"]);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -59,23 +64,5 @@ export const ctrlDeletePost = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(500).json({ message: "Couldn't delete post" });
-  }
-};
-
-export const isAuthor = async ({ postId, userId }) => {
-  try {
-    const post = await PostModel.findOne({
-      _id: postId,
-      author: userId,
-    });
-
-    if (!post) {
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.log(error);
-    return false;
   }
 };
