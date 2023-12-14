@@ -1,6 +1,7 @@
 import { param, body } from "express-validator";
 import { applyValidations } from "../middlewares/apply-validations.js";
 
+//se crean validaciones con los métodos que nos facilita express-validator
 export const createCommentValidations = [
   param("postId")
     .notEmpty()

@@ -16,6 +16,7 @@ import {
 
 const commentRouter = Router();
 
+//se crean las rutas aplicando el autenticador de header y el validador d tokens + las validaciones de cada controlador
 commentRouter.get("/:postId", getPostCommentsValidations, ctrlGetPostComments);
 
 commentRouter.post(

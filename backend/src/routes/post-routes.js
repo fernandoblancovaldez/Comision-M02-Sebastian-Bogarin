@@ -15,6 +15,7 @@ import {
 
 const postRouter = Router();
 
+//se crean las rutas aplicando el autenticador de header y el validador d tokens + las validaciones de cada controlador
 postRouter.get("/", ctrlListPosts);
 postRouter.get("/:postId", getPostValidations, ctrlGetPost);
 

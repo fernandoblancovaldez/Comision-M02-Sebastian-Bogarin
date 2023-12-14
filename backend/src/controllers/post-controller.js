@@ -1,5 +1,6 @@
 import { PostModel } from "../models/post-model.js";
 
+//se crean controladores para el CRUD de posteos
 export const ctrlCreatePost = async (req, res) => {
   const userId = req.user._id;
 
