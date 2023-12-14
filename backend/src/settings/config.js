@@ -8,4 +8,5 @@ export const env = {
   PORT: process.env.PORT || 5000,
   MONGO: process.env.MONGO_URI || "mongodb://localhost:27017/tripshare",
   DATABASE: process.env.DATABASE_NAME || "tripshare",
+  JWT_SECRET: process.env.JWT_SECRET || "secret",
 };
