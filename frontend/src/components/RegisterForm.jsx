@@ -1,23 +1,5 @@
 import React from "react";
-// {
-//   username: {
-//     type: String,
-//     require: true,
-//   },
-//   password: {
-//     type: String,
-//     require: true,
-//   },
-//   email: {
-//     type: String,
-//     require: true,
-//     unique: true,
-//   },
-//   avatarURL: {
-//     type: String,
-//     require: true,
-//   },
-// }
+
 const RegisterForm = () => {
   return (
     <div>
