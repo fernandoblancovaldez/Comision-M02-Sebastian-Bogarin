@@ -1,11 +1,11 @@
-import { useState } from "react";
-import "./App.css";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
   return (
-    <div>
+    <>
       <h1>TripshareApp</h1>
-    </div>
+      <RegisterForm />
+    </>
   );
 }
 
