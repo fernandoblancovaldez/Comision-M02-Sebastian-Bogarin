@@ -1,7 +1,10 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const formRef = useRef(null);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -28,6 +31,7 @@ const RegisterForm = () => {
     const res = await req.json();
     console.log(res);
 
+    navigate("/post")
     formRef.current.reset();
   };
 
