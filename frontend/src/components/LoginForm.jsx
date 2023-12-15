@@ -2,14 +2,14 @@ import React from "react";
 
 const LoginForm = () => {
   return (
-    <div>
+    <>
       <h2>Login</h2>
       <form>
-        <input type="email" placeholder="usuario@usuario.com" />
-        <input type="password" placeholder="******" />
+        <input type="email" placeholder="usuario@usuario.com" required />
+        <input type="password" placeholder="******" required />
         <button>Login</button>
       </form>
-    </div>
+    </>
   );
 };
 
