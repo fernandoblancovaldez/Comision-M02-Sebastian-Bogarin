@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Error404 from "../pages/Error404";
 import Home from "../pages/Home";
