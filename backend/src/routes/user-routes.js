@@ -18,7 +18,7 @@ import {
 const userRouter = Router();
 
 userRouter.post("/register", registerUserValidations, ctrlRegisterUser);
-userRouter.get("/login", loginUserValidations, ctrlLoginUser);
+userRouter.post("/login", loginUserValidations, ctrlLoginUser);
 
 userRouter.patch(
   "/:userId",
