@@ -21,6 +21,8 @@ const RegisterForm = () => {
         headers: { "Content-Type": "application/json" },
       }
     );
+    if (req.status === 400)
+      return alert("Error: quizas el usuario o el email se encuentren en uso");
     if (req.status !== 201) return alert("Error al registrar al usuario");
 
     const res = await req.json();

@@ -12,7 +12,7 @@ export const registerUserValidations = [
     .custom(async (value) => {
       const user = await UserModel.findOne({ username: value });
 
-      if (user) throw new Error("username already in use");
+      if (user) throw new Error("Username already in use");
 
       return true;
     }),
