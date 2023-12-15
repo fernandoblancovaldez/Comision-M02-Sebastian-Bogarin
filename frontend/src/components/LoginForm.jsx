@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const LoginForm = () => {
+  const { login } = useContext(AuthContext);
   const formRef = useRef(null);
   const navigate = useNavigate();
 
@@ -26,9 +28,9 @@ const LoginForm = () => {
     if (req.status !== 200) return alert("Error al registrar al usuario");
 
     const res = await req.json();
-    console.log(res);
+    login(res);
 
-    navigate("/post");
+    navigate("/posts");
     formRef.current.reset();
   };
   return (
