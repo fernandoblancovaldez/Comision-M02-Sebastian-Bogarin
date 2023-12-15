@@ -23,7 +23,7 @@ const LoginForm = () => {
       return alert(
         "Error: no se encontró una cominacion de Email y Password en la base de datos"
       );
-    if (req.status !== 201) return alert("Error al registrar al usuario");
+    if (req.status !== 200) return alert("Error al registrar al usuario");
 
     const res = await req.json();
     console.log(res);
