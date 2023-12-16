@@ -5,7 +5,6 @@ import UpdateUserForm from "../components/UpdateUserForm";
 
 const Profile = () => {
   const { auth, logout } = useContext(AuthContext);
-  console.log(auth);
 
   const handleDeleteUser = async (e) => {
     e.preventDefault();
