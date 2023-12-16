@@ -20,6 +20,7 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
+//se establecen las rutas
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);

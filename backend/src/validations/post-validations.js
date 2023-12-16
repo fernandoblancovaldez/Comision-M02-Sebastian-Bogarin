@@ -2,6 +2,7 @@ import { param, body } from "express-validator";
 import { applyValidations } from "../middlewares/apply-validations.js";
 import { PostModel } from "../models/post-model.js";
 
+//se crean validaciones con los métodos que nos facilita express-validator
 export const createPostValidations = [
   body("title")
     .notEmpty()

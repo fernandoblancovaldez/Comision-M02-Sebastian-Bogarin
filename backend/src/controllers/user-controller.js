@@ -6,15 +6,18 @@ import { createJWT } from "../utils/jwt.js"; //nos servirá para proteger el acc
 export const ctrlRegisterUser = async (req, res) => {
   try {
     const data = req.body; //se extrae la data para crear el user
-    const { password } = req.body; //se extrae el password para encryptarlo
+    const { email, password } = req.body; //se extrae el password para encryptarlo
 
     const hashedPassword = await bcrypt.hash(password, 10); //se encrypta el password
-    const user = { ...data, password: hashedPassword }; //se crea nuevo modelo con la data y el password encryptado
+    const newData = { ...data, password: hashedPassword }; //se crea nuevo modelo con la data y el password encryptado
 
-    const newUser = new UserModel(user); //se usa el método nativo de mongo
+    const newUser = new UserModel(newData); //se usa el método nativo de mongo
     await newUser.save();
 
     const token = await createJWT({ userId: newUser._id }); //se crea token para luego enviarlo por json como respuesta
+    const user = await UserModel.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
     res.status(201).json({ token, user });
   } catch (error) {
     console.log(error);

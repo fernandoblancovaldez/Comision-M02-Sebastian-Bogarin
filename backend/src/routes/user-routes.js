@@ -17,6 +17,7 @@ import {
 //se crea el enrutador para /user
 const userRouter = Router();
 
+//se crean las rutas aplicando el autenticador de header y el validador d tokens + las validaciones de cada controlador
 userRouter.post("/register", registerUserValidations, ctrlRegisterUser);
 userRouter.post("/login", loginUserValidations, ctrlLoginUser);
 

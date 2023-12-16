@@ -4,7 +4,6 @@ import { AuthContext } from "../providers/AuthProvider";
 const UpdateUserForm = () => {
   const { auth, login } = useContext(AuthContext);
   const formRef = useRef(null);
-  console.log(auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
