@@ -19,7 +19,7 @@ const userRouter = Router();
 
 //se crean las rutas aplicando el autenticador de header y el validador d tokens + las validaciones de cada controlador
 userRouter.post("/register", registerUserValidations, ctrlRegisterUser);
-userRouter.get("/login", loginUserValidations, ctrlLoginUser);
+userRouter.post("/login", loginUserValidations, ctrlLoginUser);
 
 userRouter.patch(
   "/:userId",
