@@ -13,9 +13,9 @@ function PrivateRoutes() {
     }
   }, [auth, navigate]);
 
-  if (auth === undefined) return <div>Loading ..</div>;
+  if (auth === undefined)
+    return <span className="loading loading-ball loading-lg"></span>;
 
-  console.log("ruta privada");
   return <Outlet />;
 }
 
