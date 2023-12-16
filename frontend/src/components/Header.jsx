@@ -69,6 +69,16 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
+                  <a
+                    className="justify-between"
+                    onClick={() => {
+                      navigate("/new");
+                    }}
+                  >
+                    Create Post +
+                  </a>
+                </li>
+                <li>
                   <a onClick={logout}>Logout</a>
                 </li>
               </ul>

@@ -28,15 +28,17 @@ const Profile = () => {
     <>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <img className="mask mask-circle" src={auth?.user?.avatarURL} />
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">{auth?.user?.username} !</h1>
-            <p className="py-6">Here you can edit your profile !</p>
+            <img className="mask mask-circle" src={auth?.user?.avatarURL} />
+            <h1 className="text-5xl font-bold text-center">
+              {auth?.user?.username} !
+            </h1>
+            <p className="py-6 text-center">Here you can edit your profile !</p>
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <UpdateUserForm />
-            <form onSubmit={handleDeleteUser} className="card-body">
-              <div className="form-control mt-6">
+            <form onSubmit={handleDeleteUser} className="card-body pt-0">
+              <div className="form-control">
                 <button className="btn btn-error text-white">
                   Delete user
                 </button>

@@ -33,23 +33,58 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} ref={formRef}>
-        <input type="text" placeholder="Usuario" name="username" required />
-        <input type="password" placeholder="******" name="password" required />
-        <input
-          type="email"
-          placeholder="usuario@usuario.com"
-          name="email"
-          required
-        />
-        <input
-          type="url"
-          placeholder="www.my-avatar.com"
-          name="avatarURL"
-          required
-        />
-        <button>Register</button>
+      <form onSubmit={handleSubmit} ref={formRef} className="card-body">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">User</span>
+          </label>
+          <input
+            type="text"
+            placeholder="User"
+            name="username"
+            className="input input-bordered text-slate-500"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="******"
+            name="password"
+            className="input input-bordered text-slate-500"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="usuario@usuario.com"
+            name="email"
+            className="input input-bordered text-slate-500"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Avatar URL</span>
+          </label>
+          <input
+            type="url"
+            placeholder="www.my-avatar.com"
+            name="avatarURL"
+            className="input input-bordered text-slate-500"
+            required
+          />
+        </div>
+        <div className="form-control mt-6">
+          <button className="btn btn-primary text-slate-100">Register</button>
+        </div>
       </form>
     </>
   );

@@ -5,6 +5,7 @@ import Posts from "../pages/Posts.jsx";
 import Post from "../pages/Post.jsx";
 import PrivateRoutes from "./PrivateRoutes.jsx";
 import Profile from "../pages/Profile.jsx";
+import NewPost from "../pages/NewPost.jsx";
 
 const Main = () => {
   return (
@@ -12,6 +13,7 @@ const Main = () => {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/new" element={<NewPost />} />
         </Route>
 
         <Route exact path="/posts/:postId" element={<Post />} />

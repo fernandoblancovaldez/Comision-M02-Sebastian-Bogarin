@@ -26,12 +26,16 @@ const Home = () => {
               In drug slang, a trip is a metaphor for the hallucinatory high
               produced by LSD, magic mushrooms, and other drugs.
             </p>
-            <button
-              className="btn bg-base-100 font-semibold mx-1"
-              onClick={() => document.getElementById("login_modal").showModal()}
-            >
-              Login
-            </button>
+            {!auth && (
+              <button
+                className="btn bg-base-100 font-semibold mx-1"
+                onClick={() =>
+                  document.getElementById("login_modal").showModal()
+                }
+              >
+                Login
+              </button>
+            )}
             <dialog
               id="login_modal"
               className="modal modal-bottom sm:modal-middle"
@@ -45,14 +49,16 @@ const Home = () => {
                 </div>
               </div>
             </dialog>
-            <button
-              className="btn bg-base-300 font-semibold mx-1"
-              onClick={() =>
-                document.getElementById("register_modal").showModal()
-              }
-            >
-              Register
-            </button>
+            {!auth && (
+              <button
+                className="btn bg-base-300 font-semibold mx-1"
+                onClick={() =>
+                  document.getElementById("register_modal").showModal()
+                }
+              >
+                Register
+              </button>
+            )}
             <dialog
               id="register_modal"
               className="modal modal-bottom sm:modal-middle"

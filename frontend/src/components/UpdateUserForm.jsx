@@ -38,14 +38,14 @@ const UpdateUserForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} ref={formRef} className="card-body">
+      <form onSubmit={handleSubmit} ref={formRef} className="card-body pb-4">
         <div className="form-control">
           <label className="label">
             <span className="label-text">User</span>
           </label>
           <input
             type="text"
-            placeholder="Usuario"
+            placeholder="User"
             name="username"
             className="input input-bordered"
             required
