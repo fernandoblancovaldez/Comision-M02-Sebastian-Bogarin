@@ -1,11 +1,9 @@
 import { useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const LoginForm = () => {
   const { login } = useContext(AuthContext);
   const formRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +14,7 @@ const LoginForm = () => {
 
     const user = { email, password };
 
-    const req = await fetch("https://api-tripshare.up.railway.app/user/login", {
+    const req = await fetch("http://localhost:5001/user/login", {
       method: "POST",
       body: JSON.stringify(user),
       headers: { "Content-Type": "application/json" },
@@ -28,9 +26,9 @@ const LoginForm = () => {
     if (req.status !== 200) return alert("Error al registrar al usuario");
 
     const res = await req.json();
+    console.log(res);
     login(res);
 
-    navigate("/posts");
     formRef.current.reset();
   };
   return (
